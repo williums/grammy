@@ -1,4 +1,5 @@
 import { Client, Intents } from 'discord.js'
+import { downloadClip } from './download.js'
 import { TOKEN } from './env/index.js'
 import { exitHook } from './exitHook.js'
 
@@ -14,13 +15,29 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user?.tag}`)
 })
 
-client.on('messageCreate', message => {
+client.on('messageCreate', async message => {
   const CLIP_RX = /https:\/\/clips.twitch.tv\/([a-zA-Z\d-]+)/g
   const matches = CLIP_RX.exec(message.cleanContent)
   if (matches === null) return
 
   const [url, id] = matches
-  console.log({ url, id })
+  const reaction = await message.react('⌛')
+
+  try {
+    console.log(`${id}: Downloading...`)
+    await downloadClip(url)
+    console.log(`${id}: Downloading complete!`)
+
+    await reaction.remove()
+    await message.react('✅')
+  } catch (error: unknown) {
+    await reaction.remove()
+    await message.react('❗')
+
+    if (error instanceof Error) {
+      console.error(error)
+    }
+  }
 })
 
 void client.login(TOKEN)

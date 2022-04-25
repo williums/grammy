@@ -49,5 +49,5 @@ build/
 !.env.example
 config.json
 
-# Docker Redis DB
-db/
+# Download Directory
+download/
