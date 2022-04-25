@@ -28,15 +28,14 @@ client.on('messageCreate', async message => {
     await downloadClip(url)
     console.log(`${id}: Downloading complete!`)
 
-    await reaction.remove()
     await message.react('✅')
   } catch (error: unknown) {
-    await reaction.remove()
     await message.react('❗')
-
     if (error instanceof Error) {
       console.error(error)
     }
+  } finally {
+    await reaction.remove()
   }
 })
 
