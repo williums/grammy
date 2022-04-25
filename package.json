@@ -4,7 +4,7 @@
   "type": "module",
   "main": "./build/index.js",
   "scripts": {
-    "test": "yarn run check && yarn run lint && yarn run ava",
+    "test": "yarn run check && yarn run lint",
     "check": "yarn run compile --noEmit",
     "lint": "xo",
     "compile": "tsc",
