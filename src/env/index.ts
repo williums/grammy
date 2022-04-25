@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { registerString } from './register.js'
 
 // #region Globals
@@ -9,4 +8,5 @@ export const IS_DEV = !IS_PROD
 
 // #region Application
 export const TOKEN = registerString('TOKEN', true)
+export const DOWNLOAD_DIR = registerString('DOWNLOAD_DIR') ?? './download'
 // #endregion

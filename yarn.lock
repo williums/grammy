@@ -225,6 +225,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/mkdirp@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@types/mkdirp@npm:1.0.2"
+  dependencies:
+    "@types/node": "*"
+  checksum: 72dedfb2d250f0e44ec964ac68ff6a4a03d7d9d6e83ae1d5ba6d212791af69cf051a5fac59846826242d099de56a18c8e0581861792fae8b845b3c9ad67ecdeb
+  languageName: node
+  linkType: hard
+
 "@types/node-fetch@npm:^2.5.12":
   version: 2.6.1
   resolution: "@types/node-fetch@npm:2.6.1"
@@ -825,14 +834,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "clippy@workspace:."
   dependencies:
+    "@types/mkdirp": ^1.0.2
     "@types/node": ^17.0.27
     discord.js: ^13.6.0
     dotenv: ^16.0.0
+    mkdirp: ^1.0.4
     nodemon: ^2.0.15
     rimraf: ^3.0.2
     tslib: ^2.4.0
     typescript: ^4.6.3
     xo: ^0.48.0
+    yt-dlp-exec: ^1.0.2
   languageName: unknown
   linkType: soft
 
@@ -965,6 +977,13 @@ __metadata:
   version: 2.0.0
   resolution: "crypto-random-string@npm:2.0.0"
   checksum: 0283879f55e7c16fdceacc181f87a0a65c53bc16ffe1d58b9d19a6277adcd71900d02bb2c4843dd55e78c51e30e89b0fec618a7f170ebcc95b33182c28f05fd6
+  languageName: node
+  linkType: hard
+
+"dargs@npm:~7.0.0":
+  version: 7.0.0
+  resolution: "dargs@npm:7.0.0"
+  checksum: b8f1e3cba59c42e1f13a114ad4848c3fc1cf7470f633ee9e9f1043762429bc97d91ae31b826fb135eefde203a3fdb20deb0c0a0222ac29d937b8046085d668d1
   languageName: node
   linkType: hard
 
@@ -1715,7 +1734,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"execa@npm:^5.1.1":
+"execa@npm:^5.1.1, execa@npm:~5.1.0":
   version: 5.1.1
   resolution: "execa@npm:5.1.1"
   dependencies:
@@ -2724,6 +2743,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-unix@npm:~2.0.1":
+  version: 2.0.6
+  resolution: "is-unix@npm:2.0.6"
+  checksum: 8ae9326dae255dc9aa8175a0fe4c10fc57711e747d1105e37a6121d6ca3b872b3754fcfedf143da971d239506056378e565604c7a90a021728a4b446e197f4ec
+  languageName: node
+  linkType: hard
+
 "is-weakref@npm:^1.0.2":
   version: 1.0.2
   resolution: "is-weakref@npm:1.0.2"
@@ -3233,7 +3259,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mkdirp@npm:^1.0.3, mkdirp@npm:^1.0.4":
+"mkdirp@npm:^1.0.3, mkdirp@npm:^1.0.4, mkdirp@npm:~1.0.4":
   version: 1.0.4
   resolution: "mkdirp@npm:1.0.4"
   bin:
@@ -3277,7 +3303,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.6.1":
+"node-fetch@npm:^2.6.1, node-fetch@npm:~2.6.5":
   version: 2.6.7
   resolution: "node-fetch@npm:2.6.7"
   dependencies:
@@ -4879,6 +4905,19 @@ __metadata:
   version: 1.0.0
   resolution: "yocto-queue@npm:1.0.0"
   checksum: 2cac84540f65c64ccc1683c267edce396b26b1e931aa429660aefac8fbe0188167b7aee815a3c22fa59a28a58d898d1a2b1825048f834d8d629f4c2a5d443801
+  languageName: node
+  linkType: hard
+
+"yt-dlp-exec@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "yt-dlp-exec@npm:1.0.2"
+  dependencies:
+    dargs: ~7.0.0
+    execa: ~5.1.0
+    is-unix: ~2.0.1
+    mkdirp: ~1.0.4
+    node-fetch: ~2.6.5
+  checksum: 7af9f8d02fe1208d64b4e65952020e03d88c52335fa3638c13337ab79dc3c3c70077b985c0fb7e25c95b52bebac93b9d7ef4f291d83971576bf047719c0c2894
   languageName: node
   linkType: hard
 
