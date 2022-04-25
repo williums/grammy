@@ -1,3 +1,5 @@
 {
-  "packageManager": "yarn@3.2.0"
+  "name": "clippy",
+  "packageManager": "yarn@3.2.0",
+  "type": "module"
 }
