@@ -8,13 +8,14 @@ COPY ./package.json ./yarn.lock ./.yarnrc.yml ./
 
 RUN apk add --no-cache --virtual \
   build-deps \
+  python2 \
   python3 \
   alpine-sdk \
   autoconf \
   libtool \
   automake
 
-RUN yarn install --immutable
+RUN yarn install --immutable --inline-builds
 
 # ---
 FROM base AS builder
@@ -31,18 +32,21 @@ FROM base AS runner
 WORKDIR /app
 ENV NODE_ENV production
 
-RUN apk add --no-cache tini
+RUN apk add --no-cache tini python3
 
 COPY --from=deps /app/.yarn ./.yarn
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=builder /app/build ./build
 COPY --from=builder /app/package.json ./package.json
 
-RUN addgroup -g 1001 -S nodejs && \
+RUN mkdir /app/download && \
+  addgroup -g 1001 -S nodejs && \
   adduser -S nodejs -u 1001 && \
-  chown -R nodejs:nodejs /app/build
+  chown -R nodejs:nodejs /app/build && \
+  chown -R nodejs:nodejs /app/download
 
 USER nodejs
+VOLUME ["/app/download"]
 
 ARG GIT_REPO
 LABEL org.opencontainers.image.source=${GIT_REPO}
