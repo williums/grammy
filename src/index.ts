@@ -14,6 +14,15 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user?.tag}`)
 })
 
+client.on('messageCreate', message => {
+  const CLIP_RX = /https:\/\/clips.twitch.tv\/([a-zA-Z\d-]+)/g
+  const matches = CLIP_RX.exec(message.cleanContent)
+  if (matches === null) return
+
+  const [url, id] = matches
+  console.log({ url, id })
+})
+
 void client.login(TOKEN)
 exitHook((exit, error) => {
   console.log('Exiting...')
