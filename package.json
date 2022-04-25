@@ -1,5 +1,23 @@
 {
   "name": "clippy",
   "packageManager": "yarn@3.2.0",
-  "type": "module"
+  "type": "module",
+  "main": "./build/index.js",
+  "scripts": {
+    "test": "yarn run check",
+    "check": "yarn run compile --noEmit",
+    "compile": "tsc",
+    "clean": "rimraf build",
+    "prebuild": "yarn run clean",
+    "build": "yarn run compile",
+    "dev": "yarn run build --watch",
+    "debug": "nodemon --inspect"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.27",
+    "nodemon": "^2.0.15",
+    "rimraf": "^3.0.2",
+    "tslib": "^2.4.0",
+    "typescript": "^4.6.3"
+  }
 }
