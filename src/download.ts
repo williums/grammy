@@ -13,7 +13,7 @@ const exec = ytdl.exec as typeof import('yt-dlp-exec')['exec']
 /* eslint-enable @typescript-eslint/consistent-type-imports */
 
 export const downloadClip = async (url: string): Promise<string> => {
-  const cookies = `../${COOKIES}`
+  const cookies = `./${COOKIES}`
   const { id, ext } = await ytdl(url, {
     dumpSingleJson: true,
     cookies,

@@ -20,7 +20,7 @@ client.on('ready', () => {
 })
 
 client.on('messageCreate', async message => {
-  const IG_RX = /instagram\.com\/reel\/.*\//gi
+  const IG_RX = /instagram\.com\/reel\/(?<id>.*)\//gi
   const matches = IG_RX.exec(message.cleanContent)
   if (matches === null) return
 
@@ -29,7 +29,7 @@ client.on('messageCreate', async message => {
 
   try {
     console.log(`${id}: Downloading...`)
-    const filename = await downloadClip(url)
+    const filename = await downloadClip(`https://${url}`)
     console.log(`${id}: Downloading complete!`)
 
     await message.react('✅')
