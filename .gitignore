@@ -48,6 +48,7 @@ build/
 *.env
 !.env.example
 config.json
+*.txt
 
 # Download Directory
 download/

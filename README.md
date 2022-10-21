@@ -1,15 +1,14 @@
-# Clippy ![Docker Build](https://github.com/lolPants/clippy/workflows/Docker%20Build/badge.svg)
-> Automatically archive Twitch clips posted in Discord
+# Grammy
 
-![it looks like you're trying to archive twitch clips](./assets/readme.png)
-
-## 🚀 Running in Production
-This project uses GitHub Actions to run automated docker builds, you can find them in this repo's [Package Registry](https://github.com/lolPants/clippy/packages).
+> Automatically download and embed Instagram reels for a personal server because they DON'T WORK
 
 ### 📝 Configuration
-Clippy is configured using environment variables.
 
-| Variable | Required | Default | Description |
-| - | - | - | - |
-| `TOKEN` | ✅ | n/a | Discord Bot Login Token |
-| `DOWNLOAD_DIR` | ❌ | `./download` | Clip Download Directory |
+Grammy is configured using environment variables. Reels are downloaded and served from a file server of your choice.
+
+| Variable       | Required | Description                  |
+| -------------- | -------- | ---------------------------- |
+| `TOKEN`        | ✅       | Discord Bot Login Token      |
+| `DOWNLOAD_DIR` | ✅       | Reel Download Directory      |
+| `SERVER_URL`   | ✅       | File Server URL              |
+| `COOKIES `     | ✅       | Valid Instagram Cookies File |

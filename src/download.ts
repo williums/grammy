@@ -9,9 +9,12 @@ import { DOWNLOAD_DIR } from './env/index.js'
 // @ts-expect-error Incorrect typings
 const exec = ytdl.exec as typeof import('yt-dlp-exec')['exec']
 
-export const downloadClip = async (url: string) => {
-  const { id, title, ext } = await ytdl(url, { dumpSingleJson: true })
-  const filename = `${title} [${id}].${ext}`
+export const downloadClip = async (url: string): Promise<string> => {
+  const { id, ext } = await ytdl(url, {
+    dumpSingleJson: true,
+    cookies: 'C:/Users/williums/Code/grammy/instagram_cookies.txt',
+  })
+  const filename = `${id}.${ext}`
   const temporaryFilename = `${filename}.tmp`
 
   const dir = DOWNLOAD_DIR
@@ -22,7 +25,7 @@ export const downloadClip = async (url: string) => {
 
   const fileExists = await exists(path)
   if (fileExists) {
-    return
+    return filename
   }
 
   await pipeline(
@@ -31,6 +34,7 @@ export const downloadClip = async (url: string) => {
   )
 
   await rename(temporaryPath, path)
+  return filename
 }
 
 const exists: (path: PathLike) => Promise<boolean> = async path => {
