@@ -20,11 +20,11 @@ client.on('ready', () => {
 })
 
 client.on('messageCreate', async message => {
-  const IG_RX = /instagram\.com\/reel\/(?<id>.*)\//gi
+  const IG_RX = /instagram\.com\/(?<type>p|reel)\/(?<id>.*)\//gi
   const matches = IG_RX.exec(message.cleanContent)
   if (matches === null) return
 
-  const [url, id] = matches
+  const [url, type, id] = matches
   const reaction = await message.react('⌛')
 
   try {
@@ -35,8 +35,8 @@ client.on('messageCreate', async message => {
     await message.react('✅')
     await message.channel.send(`${SERVER_URL}/${filename}`)
   } catch (error: unknown) {
-    await message.react('❗')
-    if (error instanceof Error) {
+    if (error instanceof Error && type !== 'p') {
+      await message.react('❗')
       console.error(error)
     }
   } finally {
