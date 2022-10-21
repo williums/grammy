@@ -1,3 +1,4 @@
+import { setInterval } from 'node:timers'
 import { Client, Intents } from 'discord.js'
 import { downloadClip } from './download.js'
 import { TOKEN, SERVER_URL } from './env/index.js'
@@ -19,9 +20,8 @@ client.on('ready', () => {
 })
 
 client.on('messageCreate', async message => {
-  const CLIP_RX =
-    /((?:https?:\/\/)?(?:www\.)?instagram\.com\/(?:reel)\/([^/?#&\n]+))/gi
-  const matches = CLIP_RX.exec(message.cleanContent)
+  const IG_RX = /instagram\.com\/reel\/.*\//gi
+  const matches = IG_RX.exec(message.cleanContent)
   if (matches === null) return
 
   const [url, id] = matches
@@ -33,7 +33,7 @@ client.on('messageCreate', async message => {
     console.log(`${id}: Downloading complete!`)
 
     await message.react('✅')
-    message.channel.send(`${SERVER_URL}/${filename}`)
+    await message.channel.send(`${SERVER_URL}/${filename}`)
   } catch (error: unknown) {
     await message.react('❗')
     if (error instanceof Error) {
@@ -46,7 +46,7 @@ client.on('messageCreate', async message => {
 
 void client.login(TOKEN)
 
-setInterval(refreshCookies, 10800000)
+setInterval(refreshCookies, 10_800_000)
 
 exitHook((exit, error) => {
   console.log('Exiting...')

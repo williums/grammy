@@ -1,0 +1,13 @@
+# npm
+.npm/
+
+# VSCode
+.vscode/
+
+# Generated
+build/
+export/
+
+.github
+.yarn
+.yarnrc.yml

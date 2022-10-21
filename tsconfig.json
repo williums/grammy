@@ -16,11 +16,6 @@
     "sourceMap": true,
     "importHelpers": true
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "build"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "build"]
 }

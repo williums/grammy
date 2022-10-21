@@ -1,7 +1,7 @@
 import process from 'node:process'
 
 type AsyncExitHook = () => void
-type ExitHook = (exit: AsyncExitHook, error?: Error) => void | Promise<void>
+type ExitHook = (exit: AsyncExitHook, error?: Error) => Promise<void> | void
 
 const hooks: Set<ExitHook> = new Set()
 
@@ -15,14 +15,14 @@ const cleanup = async (error?: Error, code?: number) => {
   terminating = true
 
   const jobs = [...hooks].map(
-    async h =>
+    async hook =>
       new Promise<void>(resolve => {
-        void h(resolve, error)
-      })
+        void hook(resolve, error)
+      }),
   )
 
   await Promise.all(jobs)
-  process.exit(code !== undefined ? code : error !== undefined ? 1 : 0)
+  process.exit(code ?? error === undefined ? 0 : 1)
 }
 
 export const shutdown = (code?: number) => {

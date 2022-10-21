@@ -1,5 +1,5 @@
-import dotenv from 'dotenv'
 import process from 'node:process'
+import dotenv from 'dotenv'
 
 dotenv.config()
 
@@ -32,7 +32,7 @@ function bool(name: string, required = false): boolean | undefined {
   const isFalse = falseValues.has(value.toLowerCase())
   if (isTrue === false && isFalse === false) {
     throw new TypeError(
-      `Invalid environment variable \`${name}\` : expected type \`bool\``
+      `Invalid environment variable \`${name}\` : expected type \`bool\``,
     )
   }
 
@@ -52,7 +52,7 @@ function int(name: string, required = false): number | undefined {
   const parsed = Number.parseInt(value, 10)
   if (Number.isNaN(parsed)) {
     throw new TypeError(
-      `Invalid environment variable \`${name}\` : expected type \`int\``
+      `Invalid environment variable \`${name}\` : expected type \`int\``,
     )
   }
 
