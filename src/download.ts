@@ -13,16 +13,17 @@ const exec = ytdl.exec as typeof import('yt-dlp-exec')['exec']
 /* eslint-enable @typescript-eslint/consistent-type-imports */
 
 export const downloadClip = async (url: string): Promise<string> => {
-  const cookies = `./${COOKIES}`
-  const { id, ext } = await ytdl(url, {
-    dumpSingleJson: true,
-    cookies,
-  })
-  const filename = `${id}.${ext}`
-  const temporaryFilename = `${filename}.tmp`
-
+  const cookies = COOKIES
   const dir = DOWNLOAD_DIR
   await mkdirp(dir)
+
+  const { id, ext } = await ytdl(url, {
+    dumpSingleJson: true,
+    cookies: cookies,
+  })
+
+  const filename = `${id}.${ext}`
+  const temporaryFilename = `${filename}.tmp`
 
   const temporaryPath = join(dir, temporaryFilename)
   const path = join(dir, filename)
@@ -33,7 +34,7 @@ export const downloadClip = async (url: string): Promise<string> => {
   }
 
   await pipeline(
-    exec(url, { output: '-' }).stdout!,
+    exec(url, { output: '-', cookies: cookies }).stdout!,
     createWriteStream(temporaryPath),
   )
 
